@@ -1,1 +1,1 @@
-!/bin/bash -nla
+#!/bin/bash -la ..
