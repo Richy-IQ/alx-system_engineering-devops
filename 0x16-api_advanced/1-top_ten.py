@@ -1,22 +1,21 @@
 #!/usr/bin/python3
-"""This helps us prints"""
+"""task 1"""
 import requests
 
 
 def top_ten(subreddit):
-    """Print the top 10 hottest posts on a given subreddit."""
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {
-        "User-Agent": "Dear Dolapo v1.0.0"
-    }
-    params = {
-        "limit": 10
-    }
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
-    if response.status_code == 404:
-        print("None")
-    else:
-    	results = response.json()["data"]["children"]
-    	for title in children:
-            print(title["data"]["title"])
+    """Write a function that queries the Reddit API"""
+
+    url = 'https://www.reddit.com/r/{}/hot.json?limit=10'.format(subreddit)
+    req = requests.get(url)
+
+    if (req.status_code != 200):
+        print(None)
+        return
+
+    try:
+        childrens = req.json().get('data').get('children')
+        for children in childrens:
+            print(children.get('data').get('title'))
+    except Exception:
+        pass
